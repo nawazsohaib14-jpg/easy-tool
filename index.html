@@ -1,94 +1,78 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<title>EasyTools - Free Online Tools</title>
+<title>EasyTools</title>
 
 <style>
 body {
-    margin: 0;
-    font-family: Arial, sans-serif;
-    background: #f4f7fb;
-    color: #222;
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background: #f1f5f9;
 }
 
 header {
-    background: #2563eb;
-    color: white;
-    text-align: center;
-    padding: 35px 15px;
+  background: #2563eb;
+  color: white;
+  text-align: center;
+  padding: 30px 15px;
 }
 
 header h1 {
-    margin: 0;
-    font-size: 36px;
-}
-
-header p {
-    margin-top: 8px;
-    font-size: 17px;
+  margin: 0;
+  font-size: 36px;
 }
 
 .container {
-    max-width: 900px;
-    margin: 30px auto;
-    padding: 0 15px;
+  max-width: 900px;
+  margin: 25px auto;
+  padding: 15px;
 }
 
-.tools {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    gap: 20px;
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 20px;
 }
 
 .card {
-    background: white;
-    padding: 25px;
-    border-radius: 15px;
-    box-shadow: 0 4px 15px rgba(0,0,0,0.08);
-}
-
-.card h2 {
-    margin-top: 0;
+  background: white;
+  padding: 20px;
+  border-radius: 12px;
+  box-shadow: 0 3px 10px rgba(0,0,0,0.1);
 }
 
 input {
-    width: 100%;
-    padding: 12px;
-    margin: 6px 0;
-    border: 1px solid #ccc;
-    border-radius: 8px;
-    font-size: 15px;
+  width: 100%;
+  padding: 12px;
+  margin: 6px 0;
+  box-sizing: border-box;
+  border: 1px solid #ccc;
+  border-radius: 7px;
 }
 
 button {
-    width: 100%;
-    padding: 12px;
-    margin-top: 8px;
-    border: none;
-    border-radius: 8px;
-    background: #2563eb;
-    color: white;
-    font-size: 16px;
-    cursor: pointer;
-}
-
-button:hover {
-    background: #1d4ed8;
+  width: 100%;
+  padding: 12px;
+  margin-top: 8px;
+  background: #2563eb;
+  color: white;
+  border: none;
+  border-radius: 7px;
+  font-size: 16px;
 }
 
 .result {
-    margin-top: 15px;
-    font-weight: bold;
-    color: #2563eb;
+  margin-top: 12px;
+  font-weight: bold;
+  color: #2563eb;
 }
 
 footer {
-    text-align: center;
-    padding: 30px;
-    color: #666;
+  text-align: center;
+  padding: 30px;
+  color: #666;
 }
 </style>
 </head>
@@ -96,125 +80,157 @@ footer {
 <body>
 
 <header>
-    <h1>EasyTools</h1>
-    <p>Free Online Tools for Everyone</p>
+<h1>EasyTools</h1>
+<p>Free Online Tools</p>
 </header>
 
 <div class="container">
 
-    <div class="tools">
+<div class="grid">
 
-        <div class="card">
-            <h2>🎂 Age Calculator</h2>
+<!-- AGE -->
+<div class="card">
+<h2>🎂 Age Calculator</h2>
 
-            <input type="date" id="birthDate">
+<input type="date" id="birth">
 
-            <button onclick="calculateAge()">
-                Calculate Age
-            </button>
+<button id="ageBtn">Calculate Age</button>
 
-            <div class="result" id="ageResult"></div>
-        </div>
-
-
-        <div class="card">
-            <h2>📊 Percentage Calculator</h2>
-
-            <input type="number" id="number" placeholder="Enter number">
-
-            <input type="number" id="percent" placeholder="Enter percentage">
-
-            <button onclick="calculatePercentage()">
-                Calculate
-            </button>
-
-            <div class="result" id="percentageResult"></div>
-        </div>
+<div class="result" id="ageResult"></div>
+</div>
 
 
-        <div class="card">
-            <h2>⚖️ BMI Calculator</h2>
+<!-- PERCENTAGE -->
+<div class="card">
+<h2>📊 Percentage Calculator</h2>
 
-            <input type="number" id="weight" placeholder="Weight in kg">
+<input type="number" id="num" placeholder="Enter number">
 
-            <input type="number" id="height" placeholder="Height in cm">
+<input type="number" id="per" placeholder="Enter percentage">
 
-            <button onclick="calculateBMI()">
-                Calculate BMI
-            </button>
+<button id="perBtn">Calculate</button>
 
-            <div class="result" id="bmiResult"></div>
-        </div>
+<div class="result" id="perResult"></div>
+</div>
 
 
-        <div class="card">
-            <h2>📝 Word Counter</h2>
+<!-- BMI -->
+<div class="card">
+<h2>⚖️ BMI Calculator</h2>
 
-            <input type="text" id="text" placeholder="Write your text">
+<input type="number" id="weight" placeholder="Weight (kg)">
 
-            <button onclick="countWords()">
-                Count Words
-            </button>
+<input type="number" id="height" placeholder="Height (cm)">
 
-            <div class="result" id="wordResult"></div>
-        </div>
+<button id="bmiBtn">Calculate BMI</button>
 
-    </div>
+<div class="result" id="bmiResult"></div>
+</div>
 
+
+<!-- WORD COUNTER -->
+<div class="card">
+<h2>📝 Word Counter</h2>
+
+<input type="text" id="words" placeholder="Write something">
+
+<button id="wordBtn">Count Words</button>
+
+<div class="result" id="wordResult"></div>
+</div>
+
+</div>
 </div>
 
 <footer>
-    © 2026 EasyTools
+© 2026 EasyTools
 </footer>
 
 
 <script>
 
-function calculateAge() {
+document.getElementById("ageBtn").onclick = function() {
 
-    let birth = document.getElementById("birthDate").value;
+let birth = document.getElementById("birth").value;
 
-    if (birth === "") {
-        document.getElementById("ageResult").innerText =
-        "Please select your birth date.";
-        return;
-    }
-
-    let birthDate = new Date(birth);
-    let today = new Date();
-
-    let age = today.getFullYear() - birthDate.getFullYear();
-
-    let month = today.getMonth() - birthDate.getMonth();
-
-    if (
-        month < 0 ||
-        (month === 0 && today.getDate() < birthDate.getDate())
-    ) {
-        age--;
-    }
-
-    document.getElementById("ageResult").innerText =
-    "Your age is " + age + " years.";
+if (birth == "") {
+document.getElementById("ageResult").innerHTML =
+"Please select your birth date.";
+return;
 }
 
+let birthday = new Date(birth);
+let today = new Date();
 
-function calculatePercentage() {
+let age = today.getFullYear() - birthday.getFullYear();
 
-    let number = parseFloat(
-        document.getElementById("number").value
-    );
+let month = today.getMonth() - birthday.getMonth();
 
-    let percent = parseFloat(
-        document.getElementById("percent").value
-    );
+if (month < 0 || 
+(month === 0 && today.getDate() < birthday.getDate())) {
+age--;
+}
 
-    if (isNaN(number) || isNaN(percent)) {
+document.getElementById("ageResult").innerHTML =
+"You are " + age + " years old.";
+};
 
-        document.getElementById("percentageResult").innerText =
-        "Please enter both numbers.";
 
-        return;
-    }
+document.getElementById("perBtn").onclick = function() {
 
-    let result = (number * percent) / 
+let number = Number(document.getElementById("num").value);
+let percent = Number(document.getElementById("per").value);
+
+if (isNaN(number) || isNaN(percent)) {
+document.getElementById("perResult").innerHTML =
+"Please enter both numbers.";
+return;
+}
+
+let answer = (number * percent) / 100;
+
+document.getElementById("perResult").innerHTML =
+percent + "% of " + number + " = " + answer;
+};
+
+
+document.getElementById("bmiBtn").onclick = function() {
+
+let weight = Number(document.getElementById("weight").value);
+let height = Number(document.getElementById("height").value);
+
+if (weight <= 0 || height <= 0) {
+document.getElementById("bmiResult").innerHTML =
+"Please enter valid values.";
+return;
+}
+
+let meter = height / 100;
+
+let bmi = weight / (meter * meter);
+
+document.getElementById("bmiResult").innerHTML =
+"Your BMI is " + bmi.toFixed(1);
+};
+
+
+document.getElementById("wordBtn").onclick = function() {
+
+let text = document.getElementById("words").value.trim();
+
+if (text == "") {
+document.getElementById("wordResult").innerHTML =
+"Words: 0";
+return;
+}
+
+let count = text.split(/\s+/).length;
+
+document.getElementById("wordResult").innerHTML =
+"Words: " + count;
+};
+
+</script>
+
+</body>
+</html>
