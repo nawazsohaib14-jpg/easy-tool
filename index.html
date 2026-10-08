@@ -165,6 +165,38 @@ footer {
 
 <script>
 
+  document.getElementById("unitBtn").onclick = function() {
+
+let value = Number(document.getElementById("unitValue").value);
+let type = document.getElementById("unitType").value;
+let result = "";
+
+if (isNaN(value)) {
+document.getElementById("unitResult").innerHTML =
+"Please enter a value.";
+return;
+}
+
+if (type == "km") {
+result = value * 0.621371 + " miles";
+}
+
+if (type == "miles") {
+result = value * 1.60934 + " kilometers";
+}
+
+if (type == "kg") {
+result = value * 2.20462 + " pounds";
+}
+
+if (type == "pounds") {
+result = value * 0.453592 + " kilograms";
+}
+
+document.getElementById("unitResult").innerHTML = result;
+
+};
+
 document.getElementById("ageBtn").onclick = function() {
 
 let birth = document.getElementById("birth").value;
