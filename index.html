@@ -278,6 +278,249 @@ document.getElementById("wordResult").innerHTML =
 "Words: " + count;
 };
 
+  /* =========================
+   EXTRA EASYTOOLS
+   ========================= */
+
+const grid = document.querySelector(".grid");
+
+/* DATE CALCULATOR */
+const dateCard = document.createElement("div");
+dateCard.className = "card";
+dateCard.innerHTML = `
+<h2>📅 Date Calculator</h2>
+<input type="date" id="date1">
+<input type="date" id="date2">
+<button id="dateBtn">Calculate Days</button>
+<div class="result" id="dateResult"></div>
+`;
+grid.appendChild(dateCard);
+
+document.getElementById("dateBtn").onclick = function() {
+    let d1 = document.getElementById("date1").value;
+    let d2 = document.getElementById("date2").value;
+
+    if (!d1 || !d2) {
+        document.getElementById("dateResult").innerHTML =
+        "Please select both dates.";
+        return;
+    }
+
+    let first = new Date(d1);
+    let second = new Date(d2);
+
+    let difference = Math.abs(second - first);
+    let days = Math.ceil(difference / (1000 * 60 * 60 * 24));
+
+    document.getElementById("dateResult").innerHTML =
+    "Difference: " + days + " days";
+};
+
+
+/* DISCOUNT CALCULATOR */
+const discountCard = document.createElement("div");
+discountCard.className = "card";
+discountCard.innerHTML = `
+<h2>💰 Discount Calculator</h2>
+<input type="number" id="price" placeholder="Original price">
+<input type="number" id="discount" placeholder="Discount %">
+<button id="discountBtn">Calculate</button>
+<div class="result" id="discountResult"></div>
+`;
+grid.appendChild(discountCard);
+
+document.getElementById("discountBtn").onclick = function() {
+    let price = Number(document.getElementById("price").value);
+    let discount = Number(document.getElementById("discount").value);
+
+    if (price <= 0 || discount < 0) {
+        document.getElementById("discountResult").innerHTML =
+        "Please enter valid values.";
+        return;
+    }
+
+    let saved = price * discount / 100;
+    let finalPrice = price - saved;
+
+    document.getElementById("discountResult").innerHTML =
+    "You save: " + saved.toFixed(2) +
+    "<br>Final price: " + finalPrice.toFixed(2);
+};
+
+
+/* SIMPLE CALCULATOR */
+const calculatorCard = document.createElement("div");
+calculatorCard.className = "card";
+calculatorCard.innerHTML = `
+<h2>🧮 Simple Calculator</h2>
+<input type="number" id="calc1" placeholder="First number">
+<input type="number" id="calc2" placeholder="Second number">
+
+<select id="operation" style="width:100%;padding:12px;margin:6px 0;border-radius:7px;border:1px solid #ccc;">
+<option value="add">Addition (+)</option>
+<option value="subtract">Subtraction (-)</option>
+<option value="multiply">Multiplication (×)</option>
+<option value="divide">Division (÷)</option>
+</select>
+
+<button id="calcBtn">Calculate</button>
+<div class="result" id="calcResult"></div>
+`;
+grid.appendChild(calculatorCard);
+
+document.getElementById("calcBtn").onclick = function() {
+    let a = Number(document.getElementById("calc1").value);
+    let b = Number(document.getElementById("calc2").value);
+    let operation = document.getElementById("operation").value;
+    let result;
+
+    if (isNaN(a) || isNaN(b)) {
+        document.getElementById("calcResult").innerHTML =
+        "Please enter both numbers.";
+        return;
+    }
+
+    if (operation == "add") {
+        result = a + b;
+    }
+
+    if (operation == "subtract") {
+        result = a - b;
+    }
+
+    if (operation == "multiply") {
+        result = a * b;
+    }
+
+    if (operation == "divide") {
+        if (b == 0) {
+            document.getElementById("calcResult").innerHTML =
+            "Cannot divide by zero.";
+            return;
+        }
+        result = a / b;
+    }
+
+    document.getElementById("calcResult").innerHTML =
+    "Result: " + result;
+};
+
+
+/* NUMBER TO WORDS */
+const wordsCard = document.createElement("div");
+wordsCard.className = "card";
+wordsCard.innerHTML = `
+<h2>🔢 Number to Words</h2>
+<input type="number" id="numberWords" placeholder="Enter a number">
+<button id="numberWordsBtn">Convert</button>
+<div class="result" id="numberWordsResult"></div>
+`;
+grid.appendChild(wordsCard);
+
+function numberToWords(num) {
+
+    const ones = [
+        "", "One", "Two", "Three", "Four",
+        "Five", "Six", "Seven", "Eight", "Nine",
+        "Ten", "Eleven", "Twelve", "Thirteen",
+        "Fourteen", "Fifteen", "Sixteen",
+        "Seventeen", "Eighteen", "Nineteen"
+    ];
+
+    const tens = [
+        "", "", "Twenty", "Thirty", "Forty",
+        "Fifty", "Sixty", "Seventy", "Eighty", "Ninety"
+    ];
+
+    if (num == 0) return "Zero";
+
+    if (num < 20) return ones[num];
+
+    if (num < 100) {
+        return tens[Math.floor(num / 10)] +
+        (num % 10 ? " " + ones[num % 10] : "");
+    }
+
+    if (num < 1000) {
+        return ones[Math.floor(num / 100)] +
+        " Hundred " +
+        numberToWords(num % 100);
+    }
+
+    if (num < 1000000) {
+        return numberToWords(Math.floor(num / 1000)) +
+        " Thousand " +
+        numberToWords(num % 1000);
+    }
+
+    return "Number too large";
+}
+
+document.getElementById("numberWordsBtn").onclick = function() {
+
+    let num = Number(document.getElementById("numberWords").value);
+
+    if (!Number.isInteger(num) || num < 0) {
+        document.getElementById("numberWordsResult").innerHTML =
+        "Please enter a whole positive number.";
+        return;
+    }
+
+    document.getElementById("numberWordsResult").innerHTML =
+    numberToWords(num);
+};
+
+
+/* TIME CONVERTER */
+const timeCard = document.createElement("div");
+timeCard.className = "card";
+timeCard.innerHTML = `
+<h2>⏱️ Time Converter</h2>
+<input type="number" id="timeValue" placeholder="Enter value">
+
+<select id="timeType" style="width:100%;padding:12px;margin:6px 0;border-radius:7px;border:1px solid #ccc;">
+<option value="hoursMinutes">Hours → Minutes</option>
+<option value="minutesHours">Minutes → Hours</option>
+<option value="minutesSeconds">Minutes → Seconds</option>
+<option value="secondsMinutes">Seconds → Minutes</option>
+</select>
+
+<button id="timeBtn">Convert</button>
+<div class="result" id="timeResult"></div>
+`;
+grid.appendChild(timeCard);
+
+document.getElementById("timeBtn").onclick = function() {
+
+    let value = Number(document.getElementById("timeValue").value);
+    let type = document.getElementById("timeType").value;
+    let result;
+
+    if (isNaN(value) || value < 0) {
+        document.getElementById("timeResult").innerHTML =
+        "Please enter a valid value.";
+        return;
+    }
+
+    if (type == "hoursMinutes") {
+        result = value * 60 + " minutes";
+    }
+
+    if (type == "minutesHours") {
+        result = (value / 60).toFixed(2) + " hours";
+    }
+
+    if (type == "minutesSeconds") {
+        result = value * 60 + " seconds";
+    }
+
+    if (type == "secondsMinutes") {
+        result = (value / 60).toFixed(2) + " minutes";
+    }
+
+    document.getElementById("timeResult").innerHTML =
+    result;
+};
 </script>
 
 </body>
