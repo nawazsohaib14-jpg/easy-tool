@@ -1,1 +1,220 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+<title>EasyTools - Free Online Tools</title>
+
+<style>
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background: #f4f7fb;
+    color: #222;
+}
+
+header {
+    background: #2563eb;
+    color: white;
+    text-align: center;
+    padding: 35px 15px;
+}
+
+header h1 {
+    margin: 0;
+    font-size: 36px;
+}
+
+header p {
+    margin-top: 8px;
+    font-size: 17px;
+}
+
+.container {
+    max-width: 900px;
+    margin: 30px auto;
+    padding: 0 15px;
+}
+
+.tools {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 20px;
+}
+
+.card {
+    background: white;
+    padding: 25px;
+    border-radius: 15px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+}
+
+.card h2 {
+    margin-top: 0;
+}
+
+input {
+    width: 100%;
+    padding: 12px;
+    margin: 6px 0;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    font-size: 15px;
+}
+
+button {
+    width: 100%;
+    padding: 12px;
+    margin-top: 8px;
+    border: none;
+    border-radius: 8px;
+    background: #2563eb;
+    color: white;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+button:hover {
+    background: #1d4ed8;
+}
+
+.result {
+    margin-top: 15px;
+    font-weight: bold;
+    color: #2563eb;
+}
+
+footer {
+    text-align: center;
+    padding: 30px;
+    color: #666;
+}
+</style>
+</head>
+
+<body>
+
+<header>
+    <h1>EasyTools</h1>
+    <p>Free Online Tools for Everyone</p>
+</header>
+
+<div class="container">
+
+    <div class="tools">
+
+        <div class="card">
+            <h2>🎂 Age Calculator</h2>
+
+            <input type="date" id="birthDate">
+
+            <button onclick="calculateAge()">
+                Calculate Age
+            </button>
+
+            <div class="result" id="ageResult"></div>
+        </div>
+
+
+        <div class="card">
+            <h2>📊 Percentage Calculator</h2>
+
+            <input type="number" id="number" placeholder="Enter number">
+
+            <input type="number" id="percent" placeholder="Enter percentage">
+
+            <button onclick="calculatePercentage()">
+                Calculate
+            </button>
+
+            <div class="result" id="percentageResult"></div>
+        </div>
+
+
+        <div class="card">
+            <h2>⚖️ BMI Calculator</h2>
+
+            <input type="number" id="weight" placeholder="Weight in kg">
+
+            <input type="number" id="height" placeholder="Height in cm">
+
+            <button onclick="calculateBMI()">
+                Calculate BMI
+            </button>
+
+            <div class="result" id="bmiResult"></div>
+        </div>
+
+
+        <div class="card">
+            <h2>📝 Word Counter</h2>
+
+            <input type="text" id="text" placeholder="Write your text">
+
+            <button onclick="countWords()">
+                Count Words
+            </button>
+
+            <div class="result" id="wordResult"></div>
+        </div>
+
+    </div>
+
+</div>
+
+<footer>
+    © 2026 EasyTools
+</footer>
+
+
+<script>
+
+function calculateAge() {
+
+    let birth = document.getElementById("birthDate").value;
+
+    if (birth === "") {
+        document.getElementById("ageResult").innerText =
+        "Please select your birth date.";
+        return;
+    }
+
+    let birthDate = new Date(birth);
+    let today = new Date();
+
+    let age = today.getFullYear() - birthDate.getFullYear();
+
+    let month = today.getMonth() - birthDate.getMonth();
+
+    if (
+        month < 0 ||
+        (month === 0 && today.getDate() < birthDate.getDate())
+    ) {
+        age--;
+    }
+
+    document.getElementById("ageResult").innerText =
+    "Your age is " + age + " years.";
+}
+
+
+function calculatePercentage() {
+
+    let number = parseFloat(
+        document.getElementById("number").value
+    );
+
+    let percent = parseFloat(
+        document.getElementById("percent").value
+    );
+
+    if (isNaN(number) || isNaN(percent)) {
+
+        document.getElementById("percentageResult").innerText =
+        "Please enter both numbers.";
+
+        return;
+    }
+
+    let result = (number * percent) / 
